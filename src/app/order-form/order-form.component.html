@@ -1,0 +1,75 @@
+<button routerLink="/">back</button>
+
+
+<button (click)="fullEdit()" [hidden]="fullEditMode">Full Edit Mode</button>
+<button (click)="confirmEdit()" [hidden]="!fullEditMode">ConfirmEdit</button>
+
+
+
+
+<form [formGroup]="orderForm" class="formGroup">
+
+
+    <mat-form-field>
+        <input matInput placeholder={{OrderId}} formControlName="OrderId">
+
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder={{OrderDate}} formControlName="OrderDate">
+
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder={{Customer}} formControlName="Customer">
+
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <input matInput placeholder={{Status}} formControlName="Status">
+
+    </mat-form-field>
+
+
+    <br>
+    <input type="file" placeholder={{Status}} (change)="onFileChangedPurchaseOrder($event)">
+
+    <br>
+    <input type="file" placeholder={{Status}} (change)="onFileChangedInvoice($event)">
+
+    <br>
+    <input type="file" placeholder={{Status}} (change)="onFileChangedDeliveryNote($event)">
+    <br>
+
+
+    <br>
+    <div formArrayName="entireForm">
+        <div *ngFor="let form of entireForm.controls; let i=index" [formGroupName]="i">
+
+            <input matInput placeholder="label or header for this field" formControlName="UserField">
+            <input matInput placeholder="data" formControlName="UserEntry">
+            <button mat-raised-button color="warn" (click)="deleteField(i)">delete</button>
+
+        </div>
+
+    </div>
+
+    <br>
+    <div>
+        <input matInput placeholder="enter name of the new field" formControlName="newFieldName">
+        <button (click)="addDynamicFields()">
+      add new field
+        </button>
+
+
+        <button (click)="countFields()">
+   COUNT
+        </button>
+    </div>
+
+    <div>
+        <button mat-raised-button (click)="saveOrder()">Save Order</button>
+    </div>
+
+
+</form>
