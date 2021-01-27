@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class DatabaseService {
 
   localStorage: Storage;
+  data_: any;
 
   constructor() {
 
@@ -14,11 +15,12 @@ export class DatabaseService {
    }
 
 
-   getData(){
+   getData(): any{
 
 
 
     let toBeReturned: Array<any> = [];
+
 
     let request = window.indexedDB.open("Orders", 1),
        db,
@@ -53,11 +55,15 @@ export class DatabaseService {
 
     // store.put({file: this.selectedFile});
 
-    let  data= store.getAll();
+   let data = store.getAll();
 
     data.onsuccess = function() {
       console.log( data.result)
-      this.toBeReturned = data.result;
+      toBeReturned = data.result;
+      this.data_  = data.result;
+      console.log(this.data_);
+
+
 
     }
 
@@ -66,24 +72,26 @@ export class DatabaseService {
     tx.oncomplete = function(e) {
       db.close();
       console.log("closing")
+      console.log(this.data_)
     }
 
 
-    return toBeReturned;
+
 
 
   }
 
 
-
-
+console.log(this.data_)
 
    }
 
 
-   sendData(data:Object) {
 
 
+   sendData(data) {
+
+   console.log(data);
     let toBeReturned: Array<any> = [];
 
     let request = window.indexedDB.open("Orders", 1),
@@ -126,6 +134,10 @@ export class DatabaseService {
       console.log(inputData.result)
 
 
+    }
+
+    inputData.onerror = function(e) {
+      console.log(e)
     }
 
 

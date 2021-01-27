@@ -15,19 +15,38 @@
 
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <!-- <mat-form-field>
         <input matInput placeholder={{OrderDate}} formControlName="OrderDate">
 
+    </mat-form-field> -->
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="OrderDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+
     <br>
     <mat-form-field>
         <input matInput placeholder={{Customer}} formControlName="Customer">
 
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <!-- <mat-form-field>
         <input matInput placeholder={{Status}} formControlName="Status">
 
+    </mat-form-field> -->
+
+    <h4>Basic native select</h4>
+    <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <select matNativeControl required formControlName="Status">
+    <option value="New">New</option>
+    <option value="Order Placed">Order Placed</option>
+    <option value="Delivered">Delivered</option>
+    <option value="Closes">Closes</option>
+  </select>
     </mat-form-field>
 
 

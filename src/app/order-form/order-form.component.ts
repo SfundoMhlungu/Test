@@ -39,21 +39,22 @@ export class OrderFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
+     let d = new Date();
 
     if(!window.indexedDB){
       alert("please use a browser that")
     }
     this.orderForm = this.fb.group({
       OrderId : 0,
-        OrderDate : Date.now(),
+        OrderDate : d.toDateString(),
         Customer: '',
-        Status: '',
+        Status: "New",
         newFieldName: '',
       entireForm :this.fb.array([])
     })
 
-
+let data =   this.db.getData();
+console.log(data);
 
 
 
@@ -169,7 +170,7 @@ export class OrderFormComponent implements OnInit {
 
 
 
-    console.log(data)
+     this.db.sendData(data);
   }
 
 

@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 // remember to remove
 
 import {HttpClient} from '@angular/common/http';
+import { DatabaseService} from '../database.service';
+
+import {openDB} from "idb/with-async-ittr-cjs";
+
+
+
+
 
 
 @Component({
@@ -14,7 +21,7 @@ export class HomeComponent implements OnInit {
   resultsCount= 10;
   totalPages = 10;
 
-  data = [];
+ public data = [];
 
 
   bulkEdit = false;
@@ -24,22 +31,21 @@ export class HomeComponent implements OnInit {
   sortKey = null;
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private db: DatabaseService) {
 
 
    }
 
   ngOnInit(): void {
-    this.loadData();
+    // this.loadData();
+    this.getData();
+
+
   }
 
 
   loadData(){
-    this.http.get(`https://randomuser.me/api/?page=${this.page}&results=${this.resultsCount}`).subscribe(res =>{
-      console.log('res_ ', res);
-      this.data = res['results'];
-      this.sort()
-    });
+
   }
 
   sortBy(key){
@@ -75,7 +81,7 @@ export class HomeComponent implements OnInit {
   }
 
   toggleBulkEdit(){
-
+  console.log(this.data);
   }
 
   bulkDelete(){
@@ -87,6 +93,26 @@ export class HomeComponent implements OnInit {
   }
 
 
+  async getData(){
+  const db = await openDB("Orders", 1, {
+    upgrade(db) {
+      const store = db.createObjectStore('OrderStore', {
+        autoIncrement: true,
+      });
 
+    }
+  });
+
+console.log();
+
+
+db.getAll("OrderStore").then(result => {
+  console.log(result)
+  this.data = result;
+
+
+  console.log(this.data)
+})
+}
 
 }

@@ -9,6 +9,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+// import { MatMomentDateModule } from '@angular/material/core';
 
 
 import {FormsModule} from '@angular/forms';
@@ -18,6 +21,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrderFormComponent } from './order-form/order-form.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -38,7 +44,10 @@ import { OrderFormComponent } from './order-form/order-form.component';
      MatChipsModule,
      ReactiveFormsModule,
      FormsModule,
-     MatIconModule
+     MatIconModule,
+     MatDatepickerModule,
+     MatNativeDateModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
